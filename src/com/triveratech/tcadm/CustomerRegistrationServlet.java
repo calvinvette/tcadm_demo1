@@ -42,11 +42,17 @@ public class CustomerRegistrationServlet extends HttpServlet {
 		String lastName = request.getParameter("lastName");
 		String phoneNumber = request.getParameter("phoneNumber");
 		String email = request.getParameter("email");
+		
+		CustomerDAO dao = new CustomerJPADAO();
+		Customer customer = new Customer(firstName, lastName, phoneNumber, email);
+		dao.insert(customer);
+		
 		out.println("<h1>Hello, " + firstName + "!</h1>");
-		out.println("<br/> FN: " + firstName);
-		out.println("<br/> LN: " + lastName);
-		out.println("<br/> PN: " + phoneNumber);
-		out.println("<br/> EM: " + email);
+		out.println("<br/> CID: " + customer.getCustomerId());
+		out.println("<br/> FN: " + customer.getFirstName());
+		out.println("<br/> LN: " + customer.getLastName());
+		out.println("<br/> PN: " + customer.getPhoneNumber());
+		out.println("<br/> EM: " + customer.getEmail());
 		out.flush();
 		out.close();
 	}
